@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>countdown</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="count">
+        <h1>Sale 70% Of Everything</h1>
+
+        <div class="days-container">
+          <span class="days"></span>
+          <p>Days</p>
+        </div>
+
+        <div class="hours-container">
+          <span class="hours"></span>
+          <p>Hours</p>
+        </div>
+
+        <div class="miutes-container">
+          <span class="minutes"></span>
+          <p>Minutes</p>
+        </div>
+
+        <div class="sec-container">
+          <span class="sec"></span>
+          <p>Seconds</p>
+        </div>
+        <h4>
+          Use This Code For Limited Time <br />
+          <span>Code FS18</span>
+        </h4>
+      </div>
+
+      <!-- All Css style -->
+      <style>
+        * {
+          padding: 0;
+          margin: 0;
+        }
+
+        .container {
+          padding: 100px 40px;
+        }
+
+        .count {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-wrap: wrap;
+          background-color: rgb(7, 7, 7);
+          font-family: cursive;
+          padding: 20px;
+          position: relative;
+        }
+
+        .count h1 {
+          color: white;
+          font-size: 45px;
+          width: 100%;
+          text-align: center;
+          padding: 40px 0;
+        }
+
+        .count h1::after {
+          content: "";
+          height: 2px;
+          background-color: #ffffff;
+          width: 100%;
+          margin-left: 15px;
+        }
+
+        .days,
+        .hours,
+        .minutes,
+        .sec {
+          border: solid 1px rgb(28, 28, 28);
+          padding: 20px;
+          background-color: #edbf0a;
+          color: black;
+          font-size: 45px;
+          letter-spacing: 2px;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: lighter;
+          min-width: 80px;
+        }
+
+        .count p {
+          color: white;
+          font-weight: bold;
+          letter-spacing: 2px;
+          font-size: 18px;
+          text-align: center;
+          background-color: white;
+          width: calc(100% - 12px);
+          border: solid 1px black;
+          color: black;
+          padding: 5px;
+        }
+
+        .days-container,
+        .hours-container,
+        .miutes-container,
+        .sec-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+        }
+        .count h4 {
+          color: white;
+          width: 100%;
+          text-align: center;
+          padding: 20px 0;
+          line-height: 2.5;
+          letter-spacing: 2px;
+        }
+        
+        .count h4 span {
+          background-color: #edbf0a;
+          color: black;
+          padding: 5px;
+        }
+
+        @media(max-width:768px) {
+          .count h1{
+            font-size:30px;
+            padding: 20px;
+          }
+          .days-container, .hours-container, .miutes-container, .sec-container {
+            padding: 10px;
+          }
+          .days, .hours, .minutes, .sec{
+            padding:8px;
+            font-size:30px;
+          }
+          .count p {
+            font-size:15px;
+          }
+        }
+      </style>
+
+      <!-- All Scripted code -->
+      <script>
+        let countDown = new Date("Jan 31, 2022 23:59:59").getTime();
+
+        let counter = setInterval(() => {
+          // Get Date now
+          let dateNow = new Date().getTime();
+
+          // find the date diffrence between now and countDown date
+          let dateDiff = countDown - dateNow;
+
+          // Get Time Unites
+
+          let days = Math.floor(dateDiff / (1000 * 60 * 60 * 24));
+
+          let hours = Math.floor(
+            (dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+
+          let minutes = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+          let sec = Math.floor((dateDiff % (1000 * 60)) / 1000);
+
+          let count = document.querySelector(".count");
+
+          document.querySelector(".days").innerHTML = days;
+          document.querySelector(".hours").innerHTML = hours;
+          document.querySelector(".minutes").innerHTML = minutes;
+          document.querySelector(".sec").innerHTML = sec;
+
+          // delete countdown after ending
+          if (document.querySelector(".days").innerHTML === "0") {
+            count.innerHTML = "";
+            count.style.display = "none";
+          }
+        }, 1000);
+      </script>
+    </div>
+  </body>
+</html>
